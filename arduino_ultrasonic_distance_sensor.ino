@@ -1,6 +1,7 @@
 // Mesures somewhat accurate distance with ultrasonic distance sensor
 
-#define SAMPLE_SIZE 30
+#define SAMPLE_SIZE 20
+#define SENSOR_OFFSET 5 //cm
 
 const int vccPin = 11;
 const int pingPin = 12; // Trigger Pin of Ultrasonic Sensor
@@ -33,11 +34,11 @@ void loop() {
     duration = pulseIn(echoPin, HIGH); // Receive signal
     cm += duration / 29.0 / 2.0; // us to cm
     
-    delay(10);
+    delay(20);
   }
   
   cm /= SAMPLE_SIZE;
   
-  Serial.print(cm);
+  Serial.print(cm + SENSOR_OFFSET);
   Serial.println("cm");
 }
